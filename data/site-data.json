@@ -3,7 +3,7 @@
     "name": "Adem Hammoudi",
     "title": {"en": "Web & Mobile Application Developer", "fr": "Développeur d'applications web et mobiles", "ar": "مطوّر تطبيقات الويب والموبايل"},
     "location": "Constantine, Algeria",
-    "email": "your-email@example.com",
+    "email": "ademhammoudi119@gmail.com",
     "cv": "assets/cv.pdf",
     "photo": ""
   },
@@ -30,8 +30,11 @@
     {"title": {"en": "Laravel & MySQL back ends", "fr": "Back-ends Laravel et MySQL", "ar": "أنظمة Laravel وMySQL"}, "text": {"en": "Dashboards and management systems with a database.", "fr": "Tableaux de bord et systèmes de gestion avec base de données.", "ar": "لوحات تحكم وأنظمة إدارة مع قاعدة بيانات."}}
   ],
   "social": [
-    {"label": "GitHub", "url": "https://github.com/USERNAME"},
-    {"label": "LinkedIn", "url": "https://www.linkedin.com/in/USERNAME"}
+    {"label": "GitHub", "url": "https://github.com/rika-tech"},
+    {"label": "LinkedIn", "url": "https://www.linkedin.com/in/adem-rk-adem-rk-6a74153a6"}
+
+
+
   ],
   "projects": [
     {"id": "example-1", "title": "Example: Task Manager", "description": {"en": "Sample entry. Replace it with a real project.", "fr": "Entrée d'exemple. Remplacez-la par un vrai projet.", "ar": "مثال توضيحي. استبدله بمشروع حقيقي."}, "tech": ["Laravel", "MySQL"], "image": "assets/images/projects/example-1.png", "screenshots": [], "demo": "", "github": "", "featured": true, "example": true},
