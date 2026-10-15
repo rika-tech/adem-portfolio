@@ -1,0 +1,41 @@
+{
+  "person": {
+    "name": "Adem Hammoudi",
+    "title": {"en": "Web & Mobile Application Developer", "fr": "Développeur d'applications web et mobiles", "ar": "مطوّر تطبيقات الويب والموبايل"},
+    "location": "Constantine, Algeria",
+    "email": "your-email@example.com",
+    "cv": "assets/cv.pdf",
+    "photo": ""
+  },
+  "intro": {
+    "en": "I build web and mobile applications with attention to clean code and usable interfaces.",
+    "fr": "Je développe des applications web et mobiles avec un code propre et des interfaces faciles à utiliser.",
+    "ar": "أطوّر تطبيقات الويب والموبايل بكود نظيف وواجهات سهلة الاستخدام."
+  },
+  "bio": {
+    "en": "I hold a BAC+2 in Web and Mobile Application Development. I work with Java, JavaScript, PHP and Laravel, and I am learning more about cybersecurity fundamentals.",
+    "fr": "Je suis titulaire d'un BAC+2 en développement d'applications web et mobiles. Je travaille avec Java, JavaScript, PHP et Laravel, et j'approfondis les bases de la cybersécurité.",
+    "ar": "حاصل على شهادة BAC+2 في تطوير تطبيقات الويب والموبايل. أعمل بلغات Java وJavaScript وPHP وإطار Laravel، وأتعلم أساسيات الأمن السيبراني."
+  },
+  "languages": ["Arabic", "French (understanding)", "English (basic)"],
+  "skills": [
+    {"category": {"en": "Frontend", "fr": "Frontend", "ar": "الواجهات الأمامية"}, "items": ["HTML", "CSS", "JavaScript"]},
+    {"category": {"en": "Backend & Databases", "fr": "Backend et bases de données", "ar": "الخلفية وقواعد البيانات"}, "items": ["PHP", "Laravel", "Java", "MySQL"]},
+    {"category": {"en": "Mobile", "fr": "Mobile", "ar": "الموبايل"}, "items": ["Mobile application development"]},
+    {"category": {"en": "Tools & Security", "fr": "Outils et sécurité", "ar": "الأدوات والأمن"}, "items": ["Git", "Cybersecurity fundamentals"]}
+  ],
+  "services": [
+    {"title": {"en": "Website development", "fr": "Création de sites web", "ar": "تطوير المواقع"}, "text": {"en": "Responsive, maintainable websites and web applications.", "fr": "Sites et applications web adaptatifs et faciles à maintenir.", "ar": "مواقع وتطبيقات ويب متجاوبة وسهلة الصيانة."}},
+    {"title": {"en": "Mobile applications", "fr": "Applications mobiles", "ar": "تطبيقات الموبايل"}, "text": {"en": "Mobile apps built around your use case.", "fr": "Applications mobiles adaptées à votre besoin.", "ar": "تطبيقات موبايل مصممة حسب احتياجك."}},
+    {"title": {"en": "Laravel & MySQL back ends", "fr": "Back-ends Laravel et MySQL", "ar": "أنظمة Laravel وMySQL"}, "text": {"en": "Dashboards and management systems with a database.", "fr": "Tableaux de bord et systèmes de gestion avec base de données.", "ar": "لوحات تحكم وأنظمة إدارة مع قاعدة بيانات."}}
+  ],
+  "social": [
+    {"label": "GitHub", "url": "https://github.com/USERNAME"},
+    {"label": "LinkedIn", "url": "https://www.linkedin.com/in/USERNAME"}
+  ],
+  "projects": [
+    {"id": "example-1", "title": "Example: Task Manager", "description": {"en": "Sample entry. Replace it with a real project.", "fr": "Entrée d'exemple. Remplacez-la par un vrai projet.", "ar": "مثال توضيحي. استبدله بمشروع حقيقي."}, "tech": ["Laravel", "MySQL"], "image": "assets/images/projects/example-1.png", "screenshots": [], "demo": "", "github": "", "featured": true, "example": true},
+    {"id": "example-2", "title": "Example: Landing Page", "description": {"en": "Sample entry. Replace it with a real project.", "fr": "Entrée d'exemple. Remplacez-la par un vrai projet.", "ar": "مثال توضيحي. استبدله بمشروع حقيقي."}, "tech": ["HTML", "CSS", "JavaScript"], "image": "", "screenshots": [], "demo": "", "github": "", "featured": false, "example": true},
+    {"id": "example-3", "title": "Example: Java Desktop App", "description": {"en": "Sample entry. Replace it with a real project.", "fr": "Entrée d'exemple. Remplacez-la par un vrai projet.", "ar": "مثال توضيحي. استبدله بمشروع حقيقي."}, "tech": ["Java"], "image": "", "screenshots": [], "demo": "", "github": "", "featured": false, "example": true}
+  ]
+}

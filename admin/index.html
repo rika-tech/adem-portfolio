@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex"><title>Portfolio editor</title>
+<link rel="icon" href="../assets/icons/favicon.svg"><link rel="stylesheet" href="../css/style.css">
+<style>main{max-width:860px;margin:auto;padding:24px 20px}label{display:block;font-weight:600;margin:12px 0 4px}
+input,textarea{width:100%;padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font:inherit}
+textarea{min-height:90px;font-family:ui-monospace,Consolas,monospace;font-size:.9rem}.row{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.note{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 16px;color:var(--muted)}.ok{color:#1b7a3a}.bad{color:#b3261e}
+.proj-ed{margin:14px 0}</style></head>
+<body><main>
+<h1>Portfolio editor</h1>
+<p class="note">This page runs only in your browser. It does <b>not</b> publish anything and has no login: drafts stay in this browser's local storage. To publish, click <b>Export JSON</b>, replace <code>data/site-data.json</code> in your repository, copy any new images into <code>assets/images/projects/</code>, then commit and push.</p>
+<div class="row"><button class="btn" id="imp" type="button">Import JSON</button><input type="file" id="file" accept=".json" hidden>
+<button class="btn" id="save" type="button">Save draft</button><button class="btn" id="prev" type="button">Preview draft</button><button class="btn primary" id="exp" type="button">Export JSON</button></div>
+<p id="msg" role="status"></p>
+<div id="form"></div>
+<script>
+(function(){
+"use strict";
+var L=["en","fr","ar"],KEY="portfolio-draft",d,$=function(s){return document.querySelector(s)};
+function msg(t,ok){var m=$("#msg");m.textContent=t;m.className=ok?"ok":"bad"}
+function validate(x){if(!x||typeof x!=="object")throw new Error("Not a JSON object.");
+ if(!x.person||!x.person.name)throw new Error('Missing "person.name".');
+ if(!Array.isArray(x.projects))throw new Error('"projects" must be a list.');
+ ["skills","services","social"].forEach(function(k){if(x[k]&&!Array.isArray(x[k]))throw new Error('"'+k+'" must be a list.')});return x}
+function load(){var s;try{s=localStorage.getItem(KEY)}catch(e){}
+ if(s){try{d=validate(JSON.parse(s));draw();msg("Draft loaded.",1);return}catch(e){}}
+ fetch("../data/site-data.json").then(function(r){return r.json()}).then(function(x){d=validate(x);draw()}).catch(function(e){msg("Could not load data ("+e.message+"). Use Import JSON.")})}
+function field(label,get,set,area){var w=document.createElement("div"),l=document.createElement("label"),i=document.createElement(area?"textarea":"input");
+ l.textContent=label;i.value=get()||"";i.oninput=function(){set(i.value)};w.append(l,i);return w}
+function loc(label,o,k){o[k]=typeof o[k]==="object"&&o[k]?o[k]:{en:o[k]||""};var f=document.createElement("div");
+ L.forEach(function(g){f.appendChild(field(label+" ("+g+")",function(){return o[k][g]},function(v){o[k][g]=v},1))});return f}
+function json(label,o,k){return field(label+" (JSON)",function(){return JSON.stringify(o[k]||[],null,2)},function(v){try{o[k]=JSON.parse(v);msg("",1)}catch(e){msg(label+": invalid JSON — "+e.message)}},1)}
+function draw(){var f=$("#form");f.textContent="";var p=d.person;
+ ["name","location","email","cv","photo"].forEach(function(k){f.appendChild(field("person."+k,function(){return p[k]},function(v){p[k]=v}))});
+ f.appendChild(loc("Title",p,"title"));f.appendChild(loc("Intro",d,"intro"));f.appendChild(loc("Biography",d,"bio"));
+ f.appendChild(json("Skills",d,"skills"));f.appendChild(json("Services",d,"services"));f.appendChild(json("Social links",d,"social"));
+ var h=document.createElement("h2");h.textContent="Projects";f.appendChild(h);
+ d.projects.forEach(function(pr,i){var b=document.createElement("div");b.className="panel proj-ed";
+  b.appendChild(field("Title",function(){return pr.title},function(v){pr.title=v}));b.appendChild(loc("Description",pr,"description"));
+  b.appendChild(field("Technologies (comma separated)",function(){return(pr.tech||[]).join(", ")},function(v){pr.tech=v.split(",").map(function(s){return s.trim()}).filter(Boolean)}));
+  ["demo","github"].forEach(function(k){b.appendChild(field(k+" URL",function(){return pr[k]},function(v){pr[k]=v}))});
+  b.appendChild(field("Image path",function(){return pr.image},function(v){pr.image=v}));
+  var pick=document.createElement("input");pick.type="file";pick.accept="image/*";pick.onchange=function(){if(pick.files[0]){var n=pick.files[0].name;pr.image="assets/images/projects/"+n.replace(/[^\w.\-]/g,"-");draw();msg("Path set. Now copy "+n+" into assets/images/projects/ yourself: the browser cannot save files there.",1)}};
+  var l=document.createElement("label");l.textContent="Choose image from computer";b.append(l,pick);
+  var r=document.createElement("div");r.className="row";
+  [["Featured: "+(pr.featured?"yes":"no"),function(){pr.featured=!pr.featured}],["Move up",function(){if(i>0){d.projects.splice(i-1,0,d.projects.splice(i,1)[0])}}],["Move down",function(){if(i<d.projects.length-1){d.projects.splice(i+1,0,d.projects.splice(i,1)[0])}}],["Delete",function(){if(confirm("Delete this project?"))d.projects.splice(i,1)}]].forEach(function(a){var bt=document.createElement("button");bt.className="btn";bt.type="button";bt.textContent=a[0];bt.onclick=function(){a[1]();draw()};r.appendChild(bt)});
+  b.appendChild(r);f.appendChild(b)});
+ var add=document.createElement("button");add.className="btn primary";add.type="button";add.textContent="Add project";add.onclick=function(){d.projects.push({id:"project-"+Date.now(),title:"New project",description:{en:""},tech:[],image:"",screenshots:[],demo:"",github:"",featured:false});draw()};f.appendChild(add)}
+$("#save").onclick=function(){try{localStorage.setItem(KEY,JSON.stringify(validate(d)));msg("Draft saved in this browser only.",1)}catch(e){msg(e.message)}};
+$("#prev").onclick=function(){try{localStorage.setItem(KEY,JSON.stringify(validate(d)));window.open("../index.html?preview=1","_blank")}catch(e){msg(e.message)}};
+$("#exp").onclick=function(){try{validate(d);var a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(d,null,2)],{type:"application/json"}));a.download="site-data.json";a.click();msg("Exported. Replace data/site-data.json in your repository.",1)}catch(e){msg(e.message)}};
+$("#imp").onclick=function(){$("#file").click()};
+$("#file").onchange=function(e){var fr=new FileReader();fr.onload=function(){try{d=validate(JSON.parse(fr.result));draw();msg("Imported.",1)}catch(x){msg("Import failed: "+x.message)}};if(e.target.files[0])fr.readAsText(e.target.files[0])};
+load();
+})();
+</script></main></body></html>
