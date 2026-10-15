@@ -30,6 +30,10 @@
     {"title": {"en": "Laravel & MySQL back ends", "fr": "Back-ends Laravel et MySQL", "ar": "أنظمة Laravel وMySQL"}, "text": {"en": "Dashboards and management systems with a database.", "fr": "Tableaux de bord et systèmes de gestion avec base de données.", "ar": "لوحات تحكم وأنظمة إدارة مع قاعدة بيانات."}}
   ],
   "social": [
+    {"label": "Instagram", "url": "https://www.instagram.com/adem_rk_adem_rk/"},
+    {"label": "Twitter", "url": "https://twitter.com/adem_rk"},
+    {"label": "Facebook", "url": "https://www.facebook.com/adem.rk.adem.rk"},
+    {"label": "email", "url": "ademhammoudi119@gmail.com"},
     {"label": "GitHub", "url": "https://github.com/rika-tech"},
     {"label": "LinkedIn", "url": "https://www.linkedin.com/in/adem-rk-adem-rk-6a74153a6"}
 
